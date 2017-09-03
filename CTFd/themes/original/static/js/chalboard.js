@@ -163,7 +163,7 @@ function marksolves(cb) {
 }
 
 function updatesolves(cb){
-    $.get(script_root + '/chals/solves', function (data) {
+    $.get(script_root + "/contest/" + contest.id + '/chals/solves', function (data) {
         var solves = $.parseJSON(JSON.stringify(data));
         var chalids = Object.keys(solves);
 
@@ -262,7 +262,7 @@ function loadchals(refresh) {
 
 function loadhint(hintid){
     if (confirm("Are you sure you want to open this hint?")){
-        $.post(script_root + "/hints/" + hintid, {'nonce': $('#nonce').val()}, function(data){
+        $.post(script_root + "/contest/" + contest.id + "/hints/" + hintid, {'nonce': $('#nonce').val()}, function(data){
             if (data.errors){
                 alert(data.errors);
             } else {

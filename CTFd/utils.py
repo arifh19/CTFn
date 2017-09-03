@@ -167,7 +167,7 @@ def ctf_theme():
 
 
 @cache.memoize()
-def hide_scores():
+def hide_scores(contest=None):
     return get_config('hide_scores')
 
 
@@ -231,6 +231,8 @@ def admins_only(f):
 
 @cache.memoize()
 def view_after_ctf(contest=None):
+    if contest:
+        return True
     return bool(get_config('view_after_ctf'))
 
 
@@ -245,7 +247,10 @@ def is_scoreboard_frozen():
     return False
 
 
-def ctftime():
+def ctftime(contest=None):
+    if contest:
+        return contest.starttime < datetime.datetime.utcnow() < contest.endtime
+
     """ Checks whether it's CTF time or not. """
 
     start = get_config("start")
