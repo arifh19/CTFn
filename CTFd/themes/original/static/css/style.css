@@ -421,4 +421,17 @@ table{
     font-weight: bold;
 }
 
+.contest-participate__panel {
+    border: 4px solid #555;
+    min-height: 100px;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn-contest {
+    margin-right: 10px;
+}
+
 /* END OF CONTEST CSS */

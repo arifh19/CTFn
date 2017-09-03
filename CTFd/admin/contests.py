@@ -17,15 +17,13 @@ admin_contests = Blueprint('admin_contests', __name__)
 @admins_only
 def admin_contests_board():
     if request.method == 'POST':
-        contests = Contests.query.add_columns('id', 'slug', 'name').order_by(Contests.id).all()
+        contests = Contests.query.order_by(Contests.id).all()
 
         json_data = {'contests': []}
         for x in contests:
-            json_data['contests'].append({
-                'id': x.id,
-                'slug': x.slug,
-                'name': x.name,
-            })
+            contest_dict = vars(x)
+            contest_dict.pop('_sa_instance_state', None)
+            json_data['contests'].append(contest_dict)
 
         db.session.close()
         return jsonify(json_data)
@@ -67,6 +65,8 @@ def admin_update_contests(contestid):
         contest.description = request.form['description']
         contest.starttime = tz.localize(datetime.strptime(request.form['starttime'], '%Y-%m-%dT%H:%M')).astimezone(pytz.utc).replace(tzinfo=None)
         contest.endtime = tz.localize(datetime.strptime(request.form['endtime'], '%Y-%m-%dT%H:%M')).astimezone(pytz.utc).replace(tzinfo=None)
+        contest.protected = True if request.form['protected'] == 'True' else False
+        contest.password = request.form['password']
 
         db.session.add(contest)
         db.session.commit()

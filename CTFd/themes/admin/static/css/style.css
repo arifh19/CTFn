@@ -498,3 +498,50 @@ table{
 .gray-text{
     color: lightgray;
 }
+
+/* CONTEST CSS */
+
+.contest-item-card {
+    border: 4px solid #555;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.navbar-contest {
+    position: static;
+    display: inline-block;
+    float: none;
+    margin: 0 auto;
+}
+
+.jumbotron-contest {
+    padding-bottom: 0px;
+}
+
+.contest-item-card__table {
+
+}
+
+.contest-item-card__table td {
+    padding: 5px !important;
+}
+
+.contest-item-card__table td:first-child {
+    width: 120px;
+    font-weight: bold;
+}
+
+.contest-participate__panel {
+    border: 4px solid #555;
+    min-height: 100px;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn-contest {
+    margin-right: 10px;
+}
+
+/* END OF CONTEST CSS */

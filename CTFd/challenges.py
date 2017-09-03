@@ -433,7 +433,7 @@ def challenges_view_contest(contest_slug):
         contest_dict.pop('_sa_instance_state', None)
         return render_template('chals.html', errors=errors, start=start, end=end, contest=contest_dict)
     else:
-        return redirect(url_for('auth.login', next='challenges'))
+        return redirect('/contest/' + contest_slug + '/participate')
 
 @challenges.route('/contest/<int:contestid>/chals', methods=['GET'])
 def chals_contest(contestid):
@@ -485,7 +485,7 @@ def chal_contest(contestid, chalid):
     if utils.ctf_ended(contest=contest) and not utils.view_after_ctf(contest=contest):
         return redirect(url_for('challenges.challenges_view'))
     if not utils.user_can_view_challenges(contest=contest):
-        return redirect(url_for('auth.login', next=request.path))
+        return redirect('/contests')
     if utils.authed() and utils.is_verified() and utils.is_participated(contest=contest) and (utils.ctf_started(contest=contest) or utils.view_after_ctf(contest=contest)):
         fails = WrongKeys.query.filter_by(teamid=session['id'], chalid=chalid).count()
         logger = logging.getLogger('keys')

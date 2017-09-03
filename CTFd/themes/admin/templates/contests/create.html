@@ -61,12 +61,22 @@
 							<select class="form-control start-date" name="timezone">
 								<script>
 									document.write('<option>UTC</option>');
+									document.write('<option>Asia/Jakarta</option>');
 									var tz_names = moment.tz.names();
 									for (var i = 0; i < tz_names.length; i++) {
 										document.write('<option>' + tz_names[i] + '</option>');
 									}
 								</script>
 							</select>
+						</div>
+
+						<hr>
+
+						<div class="form-group">
+							<label for="endtime">End time
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="end time"></i>
+							</label>
+							<input type="datetime-local" class="form-control" name="endtime" placeholder="Enter Start Time">
 						</div>
 
 						<hr>

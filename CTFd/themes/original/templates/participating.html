@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if contest %}
+<div class="jumbotron home jumbotron-contest">
+	<div class="container">
+		<h1>{{ contest.name }}</h1>
+		<div class="navbar navbar-inverse">
+			<ul class="nav navbar-nav navbar-contest">
+				<li><a href="{{ request.script_root }}/contest/{{ contest.slug }}/challenges">Challenges</a></li>
+				<li><a href="{{ request.script_root }}/contest/{{ contest.slug }}/scoreboard">Scoreboard</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<div class="container main-container">
+	{% if errors %}
+	<div class="container main-container">
+		<div id='errors' class="row">
+	{% for error in errors %}
+			<h1>{{ error }}</h1>
+	{% endfor %}
+		</div>
+	</div>
+	{% else %}
+
+	<form action="/contest/{{ contest.slug }}/participate/confirm">
+		<div class="contest-participate__panel">
+			<h3>Participate in this Contest</h3>
+			<hr>
+			<table class="contest-item-card__table">
+				<tbody>
+					<tr>
+						<td>Contest name:</td>
+						<td>{{ contest.name }}</td>
+					</tr>
+					<tr>
+						<td>Start time:</td>
+						<td>{{ contest.starttime }}</td>
+					</tr>
+					<tr>
+						<td>End time:</td>
+						<td>{{ contest.endtime }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<hr>
+			<p>Do you want to join in this contest?</p>
+			<hr>
+			{% if contest.protected %}
+				<div class="form-group">
+					<label for="password">Passprase</label>
+					<input type="text" class="form-control" name="password" placeholder="Enter Passphare">
+				</div>
+				<hr>
+			{% endif %}
+			<button class="btn btn-md btn-theme btn-outlined btn-contest" type="submit">Participate</button>
+			<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contests">Cancel</a>
+		</div>
+	</form>
+
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/vendor/plotly.min.js"></script>
+	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/utils.js"></script>
+	<script>
+		{% if contest %}
+			contest = {{ contest|tojson }};
+		{% endif %}
+	</script>
+{% endblock %}

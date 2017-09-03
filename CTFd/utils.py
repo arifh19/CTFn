@@ -29,7 +29,7 @@ from six.moves.urllib.parse import urlparse, urljoin, quote, unquote
 from sqlalchemy.exc import InvalidRequestError, IntegrityError
 from werkzeug.utils import secure_filename
 
-from CTFd.models import db, WrongKeys, Pages, Config, Tracking, Teams, Files, ip2long, long2ip
+from CTFd.models import db, WrongKeys, Pages, Config, Tracking, Teams, Files, Participations, ip2long, long2ip
 
 cache = Cache()
 migrate = Migrate()
@@ -196,7 +196,9 @@ def is_verified():
         return True
 
 def is_participated(contest):
-    return True
+    teamid = session.get('id')
+    participation = Participations.query.filter_by(contestid=contest.id, teamid=teamid).first()
+    return (participation is not None)
 
 @cache.memoize()
 def is_setup():
@@ -300,6 +302,12 @@ def ctf_ended(contest=None):
 
 
 def user_can_view_challenges(contest=None):
+    if contest:
+        if (contest.can_no_participation):
+            return True
+        participations = Participations.query.filter_by(contestid=contest.id, teamid=session.get('id')).first()
+        return participations is not None
+
     config = bool(get_config('view_challenges_unregistered'))
     verify_emails = bool(get_config('verify_emails'))
     if config:

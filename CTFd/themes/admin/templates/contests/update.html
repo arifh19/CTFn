@@ -61,12 +61,29 @@
 							<select class="form-control start-date" name="timezone">
 								<script>
 									document.write('<option>UTC</option>');
+									document.write('<option>Asia/Jakarta</option>');
 									var tz_names = moment.tz.names();
 									for (var i = 0; i < tz_names.length; i++) {
 										document.write('<option>' + tz_names[i] + '</option>');
 									}
 								</script>
 							</select>
+						</div>
+
+						<hr>
+
+						<div class="form-group">
+							<label for="endtime">Password protected
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="Password protected?"></i>
+							</label>
+							<br>
+							<div class="radio">
+							  <label><input type="radio" name="protected" value="True" {{ 'checked' if contest.protected }}>Use password</label>
+							</div>
+							<div class="radio">
+							  <label><input type="radio" name="protected" value="False" {{ 'checked' if not contest.protected }}>Do not use password</label>
+							</div>
+							<input type="text" class="form-control" name="password" placeholder="Enter Passphrase" value="{{ contest.password }}">
 						</div>
 
 						<hr>

@@ -341,6 +341,10 @@ class Contests(db.Model):
     starttime = db.Column(db.DateTime)
     endtime = db.Column(db.DateTime)
     active = db.Column(db.Boolean, default=False)
+    can_no_participation = db.Column(db.Boolean, default=False)
+    can_view_after_contest = db.Column(db.Boolean, default=True)
+    protected = db.Column(db.Boolean, default=False)
+    password = db.Column(db.String(40), default='')
 
     def __init__(self, slug, name, description, starttime, endtime):
         self.slug = slug
@@ -348,3 +352,14 @@ class Contests(db.Model):
         self.description = description
         self.starttime = starttime
         self.endtime = endtime
+
+class Participations(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    teamid = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    contestid = db.Column(db.Integer, db.ForeignKey('contests.id'))
+    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    banned = db.Column(db.Boolean, default=False)
+
+    def __init__(self, teamid, contestid):
+        self.teamid = teamid
+        self.contestid = contestid

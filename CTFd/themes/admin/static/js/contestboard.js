@@ -31,13 +31,30 @@ function loadcontests(){
 
         for (var i = 0; i <= contests['contests'].length - 1; i++) {
             var contest = contests['contests'][i]
-            var contest_button = $(('<tr><td>' +
-            '<a class="chal-button col-md-2 theme-background" value="{0}" href="/admin/contest/{0}">' +
-                '<h5>{1}</h5>' +
-                '<br />' +
-                '<p class="chal-points"><b>{2}</b></p><br />' +
-            '</a>' +
-            '</td></tr>').format(contest.id, contest.slug, contest.name));
+            var contest_button = $((
+            '<div class="contest-participate__panel">' +
+            '    <a style="float: right" class="btn btn-md btn-theme btn-outlined btn-contest" href="/admin/contest/' + contest.id + '">Edit</a>' +
+            '    <h3>#' + contest.id + ' [' + contest.slug + ']' +
+            '    </h3><hr>' +
+            '    <table class="contest-item-card__table">' +
+            '        <tbody>' +
+            '            <tr>' +
+            '                <td>Contest name:</td>' +
+            '                <td>' + contest.name + '</td>' +
+            '            </tr>' +
+            '            <tr>' +
+            '                <td>Start time:</td>' +
+            '                <td>' + contest.starttime + '</td>' +
+            '            </tr>' +
+            '            <tr>' +
+            '                <td>End time:</td>' +
+            '                <td>' + contest.endtime + '</td>' +
+            '            </tr>' +
+            '        </tbody>' +
+            '    </table>' +
+            '    <hr>' +
+            '</div>'
+            ));
             $('#contests').append(contest_button);
         };
     });
