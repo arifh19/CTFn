@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from passlib.hash import bcrypt_sha256
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.sql.expression import union_all
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 
 
 def sha512(string):
@@ -352,6 +353,10 @@ class Contests(db.Model):
         self.description = description
         self.starttime = starttime
         self.endtime = endtime
+
+    @hybrid_property
+    def is_active(self):
+        return self.starttime < datetime.datetime.utcnow() < self.endtime
 
 class Participations(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -26,7 +26,19 @@
 	<div id='contests-board' class="row">
 		{% for contest in contests %}
 			<div class="contest-item-card">
-				<h2>{{ contest.name }}</h2>
+				<div class="contest-item-card__actions">
+					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/participate">Enter</a>
+					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/scoreboard">Scoreboard</a>
+				</div>
+				<span class="contest-item-card__title">{{ contest.name }}</span>
+				<div class="contest-item-card__labels">
+					{% if contest.protected %}
+						<span class="label label-default">protected</span>
+					{% endif %}
+					{% if contest.is_active %}
+						<span class="label label-success">ongoing</span>
+					{% endif %}
+				</div>
 				<p>{{ contest.description }}</p>
 				<hr>
 				<table class="contest-item-card__table">
@@ -41,9 +53,6 @@
 						</tr>
 					</tbody>
 				</table>
-				<hr>
-				<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/participate">Enter</a>
-				<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/scoreboard">Scoreboard</a>
 			</div>
 		{% endfor %}
 	</div>

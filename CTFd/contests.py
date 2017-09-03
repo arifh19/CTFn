@@ -15,6 +15,7 @@ def contests_view():
         for x in contests:
             c = vars(x)
             c.pop('_sa_instance_state', None)
+            c['is_active'] = x.is_active
             contests_dict.append(c)
 
         return render_template('contests.html', contests=contests_dict)
