@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+<style>
+	.content {
+		max-width: 1000px;
+		padding: 2em;
+		margin: 0 auto;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron home">
+	<div class="container">
+		<h1>Contests</h1>
+	</div>
+</div>
+<div class="container main-container">
+
+	<div>
+		<h2>Contests</h2>
+	</div>
+
+	<div id='contests-board' class="row">
+		{% for contest in contests %}
+			<div class="contest-item-card">
+				<h2>{{ contest.name }}</h2>
+				<p>{{ contest.description }}</p>
+				<hr>
+				<table class="contest-item-card__table">
+					<tbody>
+						<tr>
+							<td>Start time:</td>
+							<td>{{ contest.starttime }}</td>
+						</tr>
+						<tr>
+							<td>End time:</td>
+							<td>{{ contest.endtime }}</td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<a class="btn btn-md btn-theme btn-outlined" href="/contest/{{ contest.slug }}/challenges">Enter</a>
+				<a class="btn btn-md btn-theme btn-outlined" href="/contest/{{ contest.slug }}/scoreboard">Scoreboard</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<input id="nonce" type="hidden" name="nonce" value="{{ nonce }}">
+
+<div class="modal fade" id="chal-window" tabindex="-1" role="dialog">
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/utils.js"></script>
+	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/multi-modal.js"></script>
+	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/style.js"></script>
+{% endblock %}

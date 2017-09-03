@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+
+{% block stylesheets %}
+<style>
+.btn-primary { background-color: #337ab7; }
+.btn-danger { background-color: #d9534f; }
+.col-md-4 { margin-bottom: 15px; }
+.key-remove-button { margin-top: 10px; }
+.delete-tag { color: white; margin-left: 3px; cursor: pointer; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="create-challenge" class="container main-container">
+	<h1 class="text-center">Create Contest</h1>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row">
+				<div id="create-chal-entry-div">
+					<form method="POST" action="{{ script_root }}/admin/contest/new">
+
+						<div class="form-group">
+							<label for="name">Name
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="The name of your contest"></i>
+							</label>
+							<input type="text" class="form-control" name="name" placeholder="Enter contest name">
+						</div>
+
+						<div class="form-group">
+							<label for="slug">Slug
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="The slug of your contest"></i>
+							</label>
+							<input type="text" class="form-control" name="slug" placeholder="Enter slug">
+						</div>
+
+						<div class="form-group">
+							<label for="description">Description
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="markdown description"></i>
+							</label>
+							<textarea class="form-control" name="description" cols="30" rows="10" placeholder="Enter description"></textarea>
+						</div>
+
+						<hr>
+
+						<div class="form-group">
+							<label for="starttime">Start time
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="start time"></i>
+							</label>
+							<input type="datetime-local" class="form-control" name="starttime" placeholder="Enter Start Time">
+						</div>
+
+						<div class="form-group">
+							<label for="endtime">End time
+								<i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="end time"></i>
+							</label>
+							<input type="datetime-local" class="form-control" name="endtime" placeholder="Enter Start Time">
+						</div>
+
+						<div class="form-group">
+							<label for="start-timezone">Timezone:</label>
+							<select class="form-control start-date" name="timezone">
+								<script>
+									document.write('<option>UTC</option>');
+									var tz_names = moment.tz.names();
+									for (var i = 0; i < tz_names.length; i++) {
+										document.write('<option>' + tz_names[i] + '</option>');
+									}
+								</script>
+							</select>
+						</div>
+
+						<hr>
+
+						<input type="hidden" value="{{ nonce }}" name="nonce" id="nonce">
+
+						<div style="text-align:center">
+							<button class="btn btn-theme btn-outlined create-challenge-submit" type="submit">Create</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ request.script_root }}/themes/admin/static/js/utils.js"></script>
+	<script src="{{ request.script_root }}/themes/admin/static/js/vendor/codemirror.min.js"></script>
+	<script>
+	nonce = "{{ nonce }}";
+	</script>
+{% endblock %}

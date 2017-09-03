@@ -111,9 +111,10 @@ def create_app(config='CTFd.config.Config'):
 
         from CTFd.views import views
         from CTFd.challenges import challenges
+        from CTFd.contests import contests
         from CTFd.scoreboard import scoreboard
         from CTFd.auth import auth
-        from CTFd.admin import admin, admin_statistics, admin_challenges, admin_pages, admin_scoreboard, admin_keys, admin_teams
+        from CTFd.admin import admin, admin_statistics, admin_challenges, admin_pages, admin_scoreboard, admin_keys, admin_teams, admin_contests
         from CTFd.utils import init_utils, init_errors, init_logs
 
         init_utils(app)
@@ -122,6 +123,7 @@ def create_app(config='CTFd.config.Config'):
 
         app.register_blueprint(views)
         app.register_blueprint(challenges)
+        app.register_blueprint(contests)
         app.register_blueprint(scoreboard)
         app.register_blueprint(auth)
 
@@ -132,6 +134,7 @@ def create_app(config='CTFd.config.Config'):
         app.register_blueprint(admin_scoreboard)
         app.register_blueprint(admin_keys)
         app.register_blueprint(admin_pages)
+        app.register_blueprint(admin_contests)
 
         from CTFd.plugins import init_plugins
 

@@ -1,11 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% if contest %}
+<div class="jumbotron home jumbotron-contest">
+	<div class="container">
+		<h1>{{ contest.name }}</h1>
+		<div class="navbar navbar-inverse">
+			<ul class="nav navbar-nav navbar-contest">
+				<li><a href="{{ request.script_root }}/contest/{{ contest.slug }}/challenges">Challenges</a></li>
+				<li><a href="{{ request.script_root }}/contest/{{ contest.slug }}/scoreboard">Scoreboard</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% else %}
 <div class="jumbotron home">
 	<div class="container">
 		<h1>Scoreboard</h1>
 	</div>
 </div>
+{% endif %}
+
 <div class="container main-container">
 	{% if errors %}
 	<div class="container main-container">
@@ -52,5 +68,10 @@
 {% block scripts %}
 	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/vendor/plotly.min.js"></script>
 	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/utils.js"></script>
+	<script>
+		{% if contest %}
+			contest = {{ contest|tojson }};
+		{% endif %}
+	</script>
 	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/scoreboard.js"></script>
 {% endblock %}

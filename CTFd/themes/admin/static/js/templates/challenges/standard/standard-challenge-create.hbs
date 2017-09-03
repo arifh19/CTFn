@@ -104,6 +104,18 @@
         </div>
         <input type="hidden" value="{{ nonce }}" name="nonce" id="nonce">
         <input type="hidden" value="0" name="chaltype" id="chaltype">
+
+        <hr />
+
+        <div class="form-group">
+            <label for="value">Contest Id
+                <i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="insert valid contest id. There is no validation"></i>
+            </label>
+            <input type="text" class="form-control" name="contestid" placeholder="Enter contestid" required>
+        </div>
+
+        <hr />
+
         <div style="text-align:center">
             <button class="btn btn-theme btn-outlined create-challenge-submit" type="submit">Create</button>
         </div>

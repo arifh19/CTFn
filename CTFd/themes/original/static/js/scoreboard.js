@@ -1,5 +1,6 @@
 function updatescores () {
-  $.get(script_root + '/scores', function( data ) {
+  var url = contest ? '/contest/' + contest.id + '/scores' : '/scores'
+  $.get(script_root + url, function( data ) {
     teams = $.parseJSON(JSON.stringify(data));
     $('#scoreboard > tbody').empty()
     for (var i = 0; i < teams['standings'].length; i++) {
@@ -23,7 +24,8 @@ function UTCtoDate(utc){
     return d;
 }
 function scoregraph () {
-    $.get(script_root + '/top/10', function( data ) {
+    var url = contest ? '/contest/' + contest.id + '/top/10' : '/top/10'
+    $.get(script_root + url, function( data ) {
         var scores = $.parseJSON(JSON.stringify(data));
         scores = scores['scores'];
         if (Object.keys(scores).length == 0 ){

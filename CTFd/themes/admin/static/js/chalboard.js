@@ -61,20 +61,30 @@ function loadchals(){
         'nonce': $('#nonce').val()
     }, function (data) {
         categories = [];
+        contestids = [];
         challenges = $.parseJSON(JSON.stringify(data));
 
+        for (var i = challenges['game'].length - 1; i >= 0; i--) {
+            var contestid = challenges['game'][i].contestid
+            if ($.inArray(contestid, contestids) == -1) {
+                contestids.push(contestid)
+                $('#challenges').append($('<div><hr><h2> Contest#' + contestid + '</h2><table id="section-contest-' + contestid + '"></table><hr></div>'))
+            }
+        };
 
         for (var i = challenges['game'].length - 1; i >= 0; i--) {
-            if ($.inArray(challenges['game'][i].category, categories) == -1) {
+            if (!($.inArray(challenges['game'][i].category, categories) == -1 && $.inArray(challenges['game'][i].contestid, contestids) == -1)) {
                 categories.push(challenges['game'][i].category)
-                $('#challenges').append($('<tr id="' + challenges['game'][i].category.replace(/ /g,"-").hashCode() + '"><td class="col-md-1"><h3>' + challenges['game'][i].category + '</h3></td></tr>'))
+                sectionId = (challenges['game'][i].contestid+ '___' + challenges['game'][i].category.replace(/ /g,"-")).hashCode()
+                $('#section-contest-' + challenges['game'][i].contestid).append($('<tr id="' + sectionId + '"><td class="col-md-1"><h3>' + challenges['game'][i].category + '</h3></td></tr>'))
             }
         };
 
         for (var i = 0; i <= challenges['game'].length - 1; i++) {
             var chal = challenges['game'][i]
             var chal_button = $('<button class="chal-button col-md-2 theme-background" value="{0}"><h5>{1}</h5><p class="chal-points">{2}</p><span class="chal-percent">{3}% solved</span></button>'.format(chal.id, chal.name, chal.value, Math.round(chal.percentage_solved * 100)));
-            $('#' + challenges['game'][i].category.replace(/ /g,"-").hashCode()).append(chal_button);
+            sectionId = (challenges['game'][i].contestid+ '___' + challenges['game'][i].category.replace(/ /g,"-")).hashCode()
+            $('#' + sectionId).append(chal_button);
         };
 
         $('#challenges button').click(function (e) {

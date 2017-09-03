@@ -87,7 +87,7 @@ $("#answer-input").keyup(function(event){
 function submitkey(chal, key, nonce) {
     $('#submit-key').addClass("disabled-button");
     $('#submit-key').prop('disabled', true);
-    $.post(script_root + "/chal/" + chal, {
+    $.post(script_root + "/contest/" + contest.id + "/chal/" + chal, {
         key: key,
         nonce: nonce
     }, function (data) {
@@ -194,7 +194,7 @@ function getsolves(id){
 }
 
 function loadchals(refresh) {
-    $.get(script_root + "/chals", function (data) {
+    $.get(script_root + "/contest/" + contest.id + "/chals", function (data) {
         var categories = [];
         challenges = $.parseJSON(JSON.stringify(data));
 

@@ -376,6 +376,7 @@ function loadchal(id, update) {
     //$('#update-challenge .chal-delete').attr({
     //    'href': '/admin/chal/close/' + (id + 1)
     //})
+    $('.chal-contestid').val(obj.contestid);
     if (typeof update === 'undefined')
         $('#update-challenge').modal();
 }

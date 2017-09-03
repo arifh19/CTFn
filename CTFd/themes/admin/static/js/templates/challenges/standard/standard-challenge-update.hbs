@@ -74,6 +74,18 @@
                         <a href="#" data-toggle="modal" data-target="#delete-chal" class="btn btn-danger">Delete</a>
                     </div>
                     <input type="hidden" value="{{ nonce }}" name="nonce" id="nonce">
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="value">Contest Id
+                            <i class="fa fa-question-circle gray-text" data-toggle="tooltip" data-placement="right" title="insert valid contest id. There is no validation"></i>
+                        </label>
+                        <input type="text" class="form-control chal-contestid" name="contestid" placeholder="Enter contestid" required>
+                    </div>
+
+                    <hr />
+
                     <div style="text-align:center">
                         <button class="btn btn-theme btn-outlined update-challenge-submit" type="submit">Update</button>
                     </div>

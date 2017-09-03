@@ -50,6 +50,7 @@ class Challenges(db.Model):
     category = db.Column(db.String(80))
     type = db.Column(db.Integer)
     hidden = db.Column(db.Boolean)
+    contestid = db.Column(db.Integer, db.ForeignKey('contests.id'))
 
     def __init__(self, name, description, value, category, type=0):
         self.name = name
@@ -57,6 +58,15 @@ class Challenges(db.Model):
         self.value = value
         self.category = category
         self.type = type
+        # self.flags = json.dumps(flags)
+
+    def __init__(self, name, description, value, category, type=0, contestid=None):
+        self.name = name
+        self.description = description
+        self.value = value
+        self.category = category
+        self.type = type
+        self.contestid = contestid
         # self.flags = json.dumps(flags)
 
     def __repr__(self):
@@ -89,11 +99,13 @@ class Awards(db.Model):
     value = db.Column(db.Integer)
     category = db.Column(db.String(80))
     icon = db.Column(db.Text)
+    contestid = db.Column(db.Integer, db.ForeignKey('contests.id'))
 
-    def __init__(self, teamid, name, value):
+    def __init__(self, teamid, name, value, contestid):
         self.teamid = teamid
         self.name = name
         self.value = value
+        self.contestid = contestid
 
     def __repr__(self):
         return '<award %r>' % self.name
@@ -239,18 +251,21 @@ class Solves(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chalid = db.Column(db.Integer, db.ForeignKey('challenges.id'))
     teamid = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    contestid = db.Column(db.Integer, db.ForeignKey('contests.id'))
     ip = db.Column(db.String(46))
     flag = db.Column(db.Text)
     date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     team = db.relationship('Teams', foreign_keys="Solves.teamid", lazy='joined')
     chal = db.relationship('Challenges', foreign_keys="Solves.chalid", lazy='joined')
+    contest = db.relationship('Contests', foreign_keys="Solves.contestid", lazy='joined')
     # value = db.Column(db.Integer)
 
-    def __init__(self, teamid, chalid, ip, flag):
+    def __init__(self, teamid, chalid, ip, flag, contestid):
         self.ip = ip
         self.chalid = chalid
         self.teamid = teamid
         self.flag = flag
+        self.contestid = contestid
         # self.value = value
 
     def __repr__(self):
@@ -261,16 +276,19 @@ class WrongKeys(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chalid = db.Column(db.Integer, db.ForeignKey('challenges.id'))
     teamid = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    contestid = db.Column(db.Integer, db.ForeignKey('contests.id'))
     ip = db.Column(db.String(46))
     date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     flag = db.Column(db.Text)
     chal = db.relationship('Challenges', foreign_keys="WrongKeys.chalid", lazy='joined')
+    contest = db.relationship('Contests', foreign_keys="WrongKeys.contestid", lazy='joined')
 
-    def __init__(self, teamid, chalid, ip, flag):
+    def __init__(self, teamid, chalid, ip, flag, contestid):
         self.ip = ip
         self.teamid = teamid
         self.chalid = chalid
         self.flag = flag
+        self.contestid = contestid
 
     def __repr__(self):
         return '<wrong {}, {}, {}, {}>'.format(self.teamid, self.chalid, self.ip, self.flag)
@@ -314,3 +332,19 @@ class Config(db.Model):
     def __init__(self, key, value):
         self.key = key
         self.value = value
+
+class Contests(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    slug = db.Column(db.String(40))
+    name = db.Column(db.String(80))
+    description = db.Column(db.Text)
+    starttime = db.Column(db.DateTime)
+    endtime = db.Column(db.DateTime)
+    active = db.Column(db.Boolean, default=False)
+
+    def __init__(self, slug, name, description, starttime, endtime):
+        self.slug = slug
+        self.name = name
+        self.description = description
+        self.starttime = starttime
+        self.endtime = endtime

@@ -195,6 +195,8 @@ def is_verified():
     else:
         return True
 
+def is_participated(contest):
+    return True
 
 @cache.memoize()
 def is_setup():
@@ -228,7 +230,7 @@ def admins_only(f):
 
 
 @cache.memoize()
-def view_after_ctf():
+def view_after_ctf(contest=None):
     return bool(get_config('view_after_ctf'))
 
 
@@ -278,17 +280,21 @@ def ctftime():
     return False
 
 
-def ctf_started():
+def ctf_started(contest=None):
+    if contest:
+        return datetime.datetime.utcnow() > contest.starttime
     return time.time() > int(get_config("start") or 0)
 
 
-def ctf_ended():
+def ctf_ended(contest=None):
+    if contest:
+        return datetime.datetime.utcnow() > contest.endtime
     if int(get_config("end") or 0):
         return time.time() > int(get_config("end") or 0)
     return False
 
 
-def user_can_view_challenges():
+def user_can_view_challenges(contest=None):
     config = bool(get_config('view_challenges_unregistered'))
     verify_emails = bool(get_config('verify_emails'))
     if config:
