@@ -185,7 +185,7 @@ def register():
             email=request.form['email'].encode('utf-8')
         ))
         db.session.close()
-        return redirect(url_for('challenges.challenges_view'))
+        return redirect(url_for('contests.contests_view'))
     else:
         return render_template('register.html')
 
