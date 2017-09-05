@@ -217,7 +217,7 @@ def login():
 
                 if request.args.get('next') and utils.is_safe_url(request.args.get('next')):
                     return redirect(request.args.get('next'))
-                return redirect(url_for('challenges.challenges_view'))
+                return redirect(url_for('contests.contests_view'))
 
             else:  # This user exists but the password is wrong
                 logger.warn("[{date}] {ip} - submitted invalid password for {username}".format(
