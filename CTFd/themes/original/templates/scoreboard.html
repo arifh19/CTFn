@@ -17,7 +17,11 @@
 {% else %}
 <div class="jumbotron home">
 	<div class="container">
-		<h1>Scoreboard</h1>
+		<h1>Scoreboard
+			{% if not contest %}
+			<br><small>Aggregated scores from all contests</small>
+			{% endif %}
+		</h1>
 	</div>
 </div>
 {% endif %}
@@ -41,8 +45,10 @@
 		</div>
 		{% endif %}
 
-	<div id="score-graph"></div>
-	<br>
+	{% if contest %}
+		<div id="score-graph"></div>
+		<br>
+	{% endif %}
 
 	<table id="scoreboard" class="table table-striped">
 		<thead>

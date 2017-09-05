@@ -1,0 +1,210 @@
+body {
+    background: #F4F4F4;
+    z-index: 0;
+}
+
+.navbar-inverse {
+    background: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #25AECD !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    opacity: 1;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: black !important;
+}
+
+.jumbotron {
+    background: transparent;
+}
+
+.ornaments {
+    overflow: hidden;
+}
+
+.ornaments .ornament-squares-upper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%) scaleX(-1) scaleY(1);
+    z-index: -1;
+}
+
+.ornaments .ornament-squares-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(1);
+}
+
+.ornaments .ornament-squares-bottom img {
+    width: 40rem;
+    height: auto;
+    opacity: 0.8;
+}
+
+.ornaments .ornament-squares-upper.animated {
+    animation: zoomInOrnamentSquaresUpper 1s ease-in-out normal forwards;
+}
+
+.ornaments .ornament-squares-upper img {
+    width: 40rem;
+    height: auto;
+}
+
+.ornaments .ornament-cloth-upper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: scale(1);
+}
+
+.ornaments .ornament-cloth-lower {
+    position: absolute;
+    top: 80%;
+    right: 0;
+    transform: translateY(-75%) scale(-1, -1);
+    z-index: 1;
+}
+
+.ornaments .ornament-cloth-upper.animated {
+    animation: zoomInOrnamentClothUpper 1s ease-in-out normal forwards;
+}
+
+.ornaments .ornament-cloth-upper img {
+    width: 50rem;
+    height: auto;
+}
+
+.navbar-brand {
+    color: #25AECD !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.2rem !important;
+    opacity: 1;
+}
+
+.ornament-logo {
+    position: fixed;
+    top: 2rem;
+    left: 4rem;
+    width: 2rem;
+    height: auto;
+    z-index: 1000;
+}
+
+.ornament-logo img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .show-for-medium {
+        display: none !important;
+    }
+}
+
+.jumbotron {
+    background-image: url("/themes/original/static/img/hero-shadow.png");
+    background-repeat: no-repeat;
+    background-size: 700px;
+    background-position: center;
+    min-height: 150px;
+    padding: 15px;
+}
+
+.home h1 {
+    color: #555 !important;
+}
+
+.modal-content {
+    background: #F4F4F4;
+}
+
+.input-field {
+    background: #ddd;
+}
+
+.input-field:focus {
+    background: #eee;
+    color: #555;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    background: #F4F4F4;
+}
+
+.contest-item-card {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: 0;
+    background: white;
+    border-radius: 4px;
+}
+
+.footer {
+    width: 100%;
+    height: 10rem;
+    padding: 2rem 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.footer .ristek {
+    height: 5rem;
+    width: auto;
+    margin-right: 2rem;
+}
+
+.footer .ristek img {
+    height: 100%;
+    width: auto;
+}
+
+.footer .powered {
+    flex: 1;
+    height: 5rem;
+    text-align: right;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.contest-participate__panel {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: 0;
+    background: white;
+    border-radius: 4px;
+    max-width: 600px;
+}
+
+.contest-participate__panel h3 {
+    text-align: center;
+    color: #25AECD !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+}
+
+.contest-participate__panel__actions {
+    text-align: center;
+}
+
+.contest-participate__panel__actions .btn{
+    min-width: 150px;
+}
+
+.table.table-striped {
+    font-size: 2rem;
+}
+
+.table.table-striped a {
+    color: #25AECD !important;
+}

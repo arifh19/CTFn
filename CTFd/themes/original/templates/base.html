@@ -11,6 +11,7 @@
 		<link href='{{ request.script_root }}/themes/{{ ctf_theme() }}/static/css/vendor/lato.css' rel='stylesheet' type='text/css'>
 		<link href='{{ request.script_root }}/themes/{{ ctf_theme() }}/static/css/vendor/raleway.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/css/style.css">
+		<link rel="stylesheet" href="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/css/fortnight.css">
 		<link rel="stylesheet" type="text/css" href="{{ request.script_root }}/static/user.css">
 		{% block stylesheets %}{% endblock %}
 		<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/vendor/moment.min.js"></script>
@@ -20,6 +21,24 @@
 		</script>
 </head>
 <body>
+	<div class="ornaments">
+		<div class="ornament-logo show-for-medium">
+			<a data-scroll="" href="/"><img src="/themes/original/static/img/big-r.png" alt="logo"></a>
+		</div>
+		<div class="ornament-squares-upper animated">
+			<img src="/themes/original/static/img/ornament-squares.png" alt="ornament-squares">
+		</div>
+		<div class="ornament-cloth-upper show-for-medium">
+			<img src="/themes/original/static/img/ornament-cloth.png" alt="ornament-cloth">
+		</div>
+		<div class="ornament-squares-bottom">
+			<img src="/themes/original/static/img/ornament-squares.png" alt="ornament-squares">
+		</div>
+		<div class="ornament-cloth-lower show-for-medium">
+			<img src="/themes/original/static/img/ornament-cloth.png" alt="ornament-cloth">
+		</div>
+	</div>
+
 	<div class="body-container">
 		<div class="navbar navbar-inverse home">
 			<div class="container">
@@ -36,7 +55,6 @@
 						{% for page in pages() %}
 							<li><a href="{{ request.script_root }}/{{ page.route }}">{{ page.route|title }}</a></li>
 						{% endfor %}
-						<li><a href="{{ request.script_root }}/teams">Teams</a></li>
 						{% if not hide_scores() %}
 						<li><a href="{{ request.script_root }}/scoreboard">Scoreboard</a></li>
 						{% endif %}
@@ -47,7 +65,7 @@
 						{% if admin %}
 						<li><a href="{{ request.script_root }}/admin">Admin</a></li>
 						{% endif %}
-						<li><a href="{{ request.script_root }}/team/{{ id }}">Team</a></li>
+						<li><a href="{{ request.script_root }}/team/{{ id }}">You</a></li>
 						<li><a href="{{ request.script_root }}/profile">Profile</a></li>
 						<li><a href="{{ request.script_root }}/logout">Logout</a></li>
 					{% else %}
@@ -65,8 +83,15 @@
 		{% block content %}
 		{% endblock %}
 
-		<div class="navbar navbar-bottom footer">
-				<p class="text-muted text-center"><a style="text-decoration:none;" href="https://ctfd.io"><sub>Powered by CTFd</sub></p>
+			<div class="navbar navbar-bottom footer">
+			<div class="ristek">
+				<img src="/themes/original/static/img/footer_ristek.png" alt="ristek">
+			</div>
+			<div class="powered">
+				<a style="text-decoration:none;" href="https://github.com/netsos-csui/CTFn">Powered by CTFn</a>
+				<br>
+				<p>Brought to you by Network Security and Operating System <b>/ NetSOS /</b> SIG</p>
+			</div>
 		</div>
 	</div>
 	<script src="{{ request.script_root }}/themes/{{ ctf_theme() }}/static/js/vendor/jquery.min.js"></script>

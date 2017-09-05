@@ -48,17 +48,18 @@
 				</tbody>
 			</table>
 			<hr>
-			<p>Do you want to join in this contest?</p>
-			<hr>
 			{% if contest.protected %}
 				<div class="form-group">
 					<label for="password">Passprase</label>
-					<input type="text" class="form-control" name="password" placeholder="Enter Passphare">
+					<input type="text" class="input-field" name="password" placeholder="Enter Passphare">
 				</div>
+				<br>
 				<hr>
 			{% endif %}
-			<button class="btn btn-md btn-theme btn-outlined btn-contest" type="submit">Participate</button>
-			<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contests">Cancel</a>
+			<div class="contest-participate__panel__actions">
+				<button class="btn btn-md btn-theme btn-outlined btn-contest" type="submit">Participate</button>
+				<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contests">Cancel</a>
+			</div>
 		</div>
 	</form>
 
