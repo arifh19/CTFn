@@ -24,7 +24,7 @@ def contest_participate_confirm(contest_slug):
     if utils.user_can_view_challenges():  # Do we allow unauthenticated users?
         contest = Contests.query.filter_by(slug=contest_slug).first()
         if utils.is_participated(contest):
-            return redirect('/contest/' + contest_slug + '/challenges')
+            return redirect(url_for("challenges_view_contest", contest_slug=contest_slug))
 
         if contest.protected:
             if request.args.get('password') == contest.password:
@@ -32,9 +32,9 @@ def contest_participate_confirm(contest_slug):
                 db.session.add(participation)
                 db.session.commit()
                 db.session.close()
-                return redirect('/contest/' + contest_slug + '/challenges')
+                return redirect(url_for("challenges.challenges_view_contest", contest_slug=contest_slug))
             else:
-                return redirect('/contest/' + contest_slug + '/participate')
+                return redirect(url_for("contests.contest_participate", contest_slug=contest_slug))
 
         else:
             participation = Participations(session.get('id'), contest.id)
@@ -42,7 +42,7 @@ def contest_participate_confirm(contest_slug):
             db.session.commit()
             db.session.close()
 
-            return redirect('/contest/' + contest_slug + '/challenges')
+            return redirect(url_for("challenges.challenges_view_contest", contest_slug=contest_slug))
     else:
         return redirect(url_for('auth.login', next='challenges'))
 
@@ -51,7 +51,7 @@ def contest_participate(contest_slug):
     if utils.user_can_view_challenges():  # Do we allow unauthenticated users?
         contest = Contests.query.filter_by(slug=contest_slug).first()
         if utils.is_participated(contest):
-            return redirect('/contest/' + contest_slug + '/challenges')
+            return redirect(url_for("challenges.challenges_view_contest", contest_slug=contest_slug))
 
         contest_dict = vars(contest)
         contest_dict.pop('_sa_instance_state', None)

@@ -27,7 +27,7 @@
 	</div>
 	{% else %}
 
-	<form action="/contest/{{ contest.slug }}/participate/confirm">
+	<form action="{{ request.script_root }}//contest/{{ contest.slug }}/participate/confirm">
 		<div class="contest-participate__panel">
 			<h3>Participate in this Contest</h3>
 			<hr>
@@ -58,7 +58,7 @@
 			{% endif %}
 			<div class="contest-participate__panel__actions">
 				<button class="btn btn-md btn-theme btn-outlined btn-contest" type="submit">Participate</button>
-				<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contests">Cancel</a>
+				<a class="btn btn-md btn-theme btn-outlined btn-contest" href="{{ request.script_root }}//contests">Cancel</a>
 			</div>
 		</div>
 	</form>
