@@ -8,19 +8,16 @@ contests = Blueprint('contests', __name__)
 
 @contests.route('/contests', methods=['GET'])
 def contests_view():
-    if utils.user_can_view_challenges():  # Do we allow unauthenticated users?
-        contests = Contests.query.all()
-        contests_dict = []
+    contests = Contests.query.all()
+    contests_dict = []
 
-        for x in contests:
-            c = vars(x)
-            c.pop('_sa_instance_state', None)
-            c['is_active'] = x.is_active
-            contests_dict.append(c)
+    for x in contests:
+        c = vars(x)
+        c.pop('_sa_instance_state', None)
+        c['is_active'] = x.is_active
+        contests_dict.append(c)
 
-        return render_template('contests.html', contests=contests_dict)
-    else:
-        return redirect(url_for('auth.login', next='challenges'))
+    return render_template('contests.html', contests=contests_dict)
 
 @contests.route('/contest/<contest_slug>/participate/confirm', methods=['GET'])
 def contest_participate_confirm(contest_slug):
