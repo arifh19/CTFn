@@ -14,6 +14,11 @@ from flask.ext.cas import CAS
 from CTFd.utils import cache, migrate, migrate_upgrade, migrate_stamp
 from CTFd import utils
 
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
+
 # Hack to support Unicode in Python 2 properly
 if sys.version_info[0] < 3:
     reload(sys)

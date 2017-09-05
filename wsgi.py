@@ -14,4 +14,4 @@ app.config['DEBUG'] = True
 application = DispatcherMiddleware(Flask('dummy_app'), {
     '/ctf': app,
 })
-run_simple('localhost', 4000, application, use_reloader=True)
+run_simple('localhost', 8000, application, use_reloader=True)
