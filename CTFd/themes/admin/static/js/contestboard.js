@@ -33,7 +33,7 @@ function loadcontests(){
             var contest = contests['contests'][i]
             var contest_button = $((
             '<div class="contest-participate__panel">' +
-            '    <a style="float: right" class="btn btn-md btn-theme btn-outlined btn-contest" href="/admin/contest/' + contest.id + '">Edit</a>' +
+            '    <a style="float: right" class="btn btn-md btn-theme btn-outlined btn-contest" href="' + script_root + '/admin/contest/' + contest.id + '">Edit</a>' +
             '    <h3>#' + contest.id + ' [' + contest.slug + ']' +
             '    </h3><hr>' +
             '    <table class="contest-item-card__table">' +
@@ -52,7 +52,6 @@ function loadcontests(){
             '            </tr>' +
             '        </tbody>' +
             '    </table>' +
-            '    <hr>' +
             '</div>'
             ));
             $('#contests').append(contest_button);

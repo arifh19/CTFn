@@ -27,8 +27,8 @@
 		{% for contest in contests %}
 			<div class="contest-item-card">
 				<div class="contest-item-card__actions">
-					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/participate">Enter</a>
-					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="/contest/{{ contest.slug }}/scoreboard">Scoreboard</a>
+					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="{{ request.script_root }}/contest/{{ contest.slug }}/participate">Enter</a>
+					<a class="btn btn-md btn-theme btn-outlined btn-contest" href="{{ request.script_root }}/contest/{{ contest.slug }}/scoreboard">Scoreboard</a>
 				</div>
 				<span class="contest-item-card__title">{{ contest.name }}</span>
 				<div class="contest-item-card__labels">
