@@ -111,7 +111,7 @@ body {
 }
 
 .jumbotron {
-    background-image: url("/themes/original/static/img/hero-shadow.png");
+    background-image: url("/ctf/themes/original/static/img/hero-shadow.png");
     background-repeat: no-repeat;
     background-size: 700px;
     background-position: center;
@@ -202,7 +202,7 @@ body {
 }
 
 .table.table-striped {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .table.table-striped a {
