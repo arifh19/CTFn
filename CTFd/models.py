@@ -167,6 +167,9 @@ class Teams(db.Model):
     verified = db.Column(db.Boolean, default=False)
     admin = db.Column(db.Boolean, default=False)
     joined = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    full_name = db.Column(db.String(128))
+    cas_name = db.Column(db.String(128))
+
 
     def __init__(self, name, email, password):
         self.name = name

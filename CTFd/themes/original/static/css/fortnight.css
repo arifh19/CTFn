@@ -208,3 +208,11 @@ body {
 .table.table-striped a {
     color: #25AECD !important;
 }
+
+.text-cool {
+    color: #555;
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.2rem;
+}

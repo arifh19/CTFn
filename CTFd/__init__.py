@@ -9,6 +9,7 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy_utils.functions import get_tables
 from six.moves import input
+from flask.ext.cas import CAS
 
 from CTFd.utils import cache, migrate, migrate_upgrade, migrate_stamp
 from CTFd import utils
@@ -139,5 +140,16 @@ def create_app(config='CTFd.config.Config'):
         from CTFd.plugins import init_plugins
 
         init_plugins(app)
+
+        # SSO UI
+        cas = CAS()
+        cas.init_app(app, '/cas')
+        app.config['CAS_SERVER'] = 'https://sso.ui.ac.id/'
+        app.config['CAS_LOGIN_ROUTE'] = '/cas2/'
+        app.config['CAS_LOGOUT_ROUTE'] = '/cas2/logout'
+        app.config['CAS_VALIDATE_ROUTE'] = '/cas2/serviceValidate'
+        app.config['CAS_AFTER_LOGIN'] = 'auth.cas_after_login'
+        app.config['CAS_AFTER_LOGOUT'] = 'auth.cas_after_logout'
+        app.config['CAS_DEFAULT_PASSWORD'] = 'cas_default_password_!@#$%^&*()'
 
         return app
