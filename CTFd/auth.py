@@ -251,7 +251,7 @@ def do_login(name, password):
 
 
 @auth.route('/netsos/secret/chamber/login', methods=['POST', 'GET'])
-def login():
+def login_secret():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
@@ -260,6 +260,10 @@ def login():
     else:
         db.session.close()
         return render_template('login.html')
+
+@auth.route('/login-form', methods=['GET'])
+def login():
+    return render_template('login-form.html', errors=[])
 
 
 @auth.route('/logout')
