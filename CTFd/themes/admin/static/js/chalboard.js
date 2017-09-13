@@ -60,8 +60,8 @@ function loadchals(){
     $.post(script_root + "/admin/chals", {
         'nonce': $('#nonce').val()
     }, function (data) {
-        categories = [];
         contestids = [];
+        sections = [];
         challenges = $.parseJSON(JSON.stringify(data));
 
         for (var i = challenges['game'].length - 1; i >= 0; i--) {
@@ -73,9 +73,10 @@ function loadchals(){
         };
 
         for (var i = challenges['game'].length - 1; i >= 0; i--) {
-            if (!($.inArray(challenges['game'][i].category, categories) != -1 && $.inArray(challenges['game'][i].contestid, contestids) != -1)) {
-                categories.push(challenges['game'][i].category)
-                sectionId = (challenges['game'][i].contestid+ '___' + challenges['game'][i].category.replace(/ /g,"-")).hashCode()
+            var sectionName = challenges['game'][i].contestid + '___' + challenges['game'][i].category.replace(/ /g,"-");
+            if ($.inArray(sectionName, sections) == -1) {
+                sections.push(sectionName);
+                sectionId = sectionName.hashCode()
                 $('#section-contest-' + challenges['game'][i].contestid).append($('<tr id="' + sectionId + '"><td class="col-md-1"><h3>' + challenges['game'][i].category + '</h3></td></tr>'))
             }
         };
