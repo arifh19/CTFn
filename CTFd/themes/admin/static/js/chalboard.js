@@ -73,7 +73,7 @@ function loadchals(){
         };
 
         for (var i = challenges['game'].length - 1; i >= 0; i--) {
-            if (!($.inArray(challenges['game'][i].category, categories) == -1 && $.inArray(challenges['game'][i].contestid, contestids) == -1)) {
+            if (!($.inArray(challenges['game'][i].category, categories) != -1 && $.inArray(challenges['game'][i].contestid, contestids) != -1)) {
                 categories.push(challenges['game'][i].category)
                 sectionId = (challenges['game'][i].contestid+ '___' + challenges['game'][i].category.replace(/ /g,"-")).hashCode()
                 $('#section-contest-' + challenges['game'][i].contestid).append($('<tr id="' + sectionId + '"><td class="col-md-1"><h3>' + challenges['game'][i].category + '</h3></td></tr>'))
