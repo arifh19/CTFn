@@ -17,6 +17,17 @@ def contests_view():
         c['is_active'] = x.is_active
         contests_dict.append(c)
 
+    def comparator(x, y):
+	if (x['is_active'] != y['is_active']):
+            return (x['is_active'] - y['is_active'])
+        elif (x['starttime'] != y['starttime']):
+            return int((x['starttime'] - y['starttime']).total_seconds())
+        else:
+            return int((x['endtime'] - y['endtime']).total_seconds())
+
+    contests_dict = sorted(contests_dict, cmp=comparator, reverse=True)
+    print contests_dict
+
     return render_template('contests.html', contests=contests_dict)
 
 @contests.route('/contest/<contest_slug>/participate/confirm', methods=['GET'])
