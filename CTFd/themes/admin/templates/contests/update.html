@@ -93,6 +93,13 @@
 						<div style="text-align:center">
 							<button class="btn btn-theme btn-outlined create-challenge-submit" type="submit">Create</button>
 						</div>
+						
+					</form>
+					<form method="POST" action="{{ request.script_root }}/admin/contest/{{ contest.id }}/delete">
+						<div style="text-align:center">
+							<input type="hidden" value="{{ nonce }}" name="nonce" id="nonce">
+							<input class="btn btn-theme btn-outlined create-challenge-submit" type="submit" value="DELETE">
+						</div>
 					</form>
 				</div>
 			</div>
